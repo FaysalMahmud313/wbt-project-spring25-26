@@ -1,7 +1,4 @@
 <?php
-/* ---------------------------------------------------------------------------
- * Task 1 model: categories (read only for browsing)
- * ------------------------------------------------------------------------- */
 
 function categories_all($conn) {
     $res = mysqli_query($conn, "SELECT * FROM categories ORDER BY name ASC");

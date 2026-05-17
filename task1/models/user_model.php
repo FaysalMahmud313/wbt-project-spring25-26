@@ -1,8 +1,4 @@
 <?php
-/* ---------------------------------------------------------------------------
- * Task 1 model: users  (registration / login / profile)
- * Every query uses mysqli prepared statements.
- * ------------------------------------------------------------------------- */
 
 function user_find_by_email($conn, $email) {
     $stmt = mysqli_prepare($conn,

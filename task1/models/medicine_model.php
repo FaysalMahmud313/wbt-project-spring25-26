@@ -1,9 +1,5 @@
 <?php
-/* ---------------------------------------------------------------------------
- * Task 1 model: medicines (browse + AJAX search/filter)
- * ------------------------------------------------------------------------- */
 
-/* All medicines, optionally limited to one category */
 function medicines_by_category($conn, $categoryId = 0) {
     if ($categoryId > 0) {
         $stmt = mysqli_prepare($conn,
@@ -27,7 +23,6 @@ function medicines_by_category($conn, $categoryId = 0) {
     return $rows;
 }
 
-/* AJAX search: by name (q), vendor name, genre (category id) */
 function medicines_search($conn, $q, $vendor, $genreId) {
     $sql = "SELECT m.*, c.name AS category_name, c.category_type
               FROM medicines m
