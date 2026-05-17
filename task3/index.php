@@ -1,10 +1,4 @@
 <?php
-/* ===========================================================================
- * Task 3  --  Standalone entry point
- * Opens via: localhost/online_medicine_shop/task3_23544053/?page=cart
- * BASE_URL is forced to the PROJECT ROOT so all assets & links still work.
- * ========================================================================= */
-
 $_root = str_replace("\\", "/", dirname(dirname($_SERVER["SCRIPT_NAME"])));
 $_root = rtrim($_root, "/");
 define("BASE_URL", $_root === "" ? "/" : $_root . "/");
