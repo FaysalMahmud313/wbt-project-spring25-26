@@ -1,7 +1,4 @@
 <?php
-/* ---------------------------------------------------------------------------
- * Task 3 model: cart (create/update/delete) stored in the DB
- * ------------------------------------------------------------------------- */
 
 function t3_cart_items($conn, $userId) {
     $stmt = mysqli_prepare($conn,
@@ -30,7 +27,6 @@ function t3_cart_count($conn, $userId) {
     return (int)$row["c"];
 }
 
-/* Add to cart (or increase quantity if the row already exists) */
 function t3_cart_add($conn, $userId, $medicineId, $qty) {
     $stmt = mysqli_prepare($conn,
         "SELECT id, quantity FROM cart WHERE user_id = ? AND medicine_id = ?");
