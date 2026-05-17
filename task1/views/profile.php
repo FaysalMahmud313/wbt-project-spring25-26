@@ -1,4 +1,4 @@
-<?php /* Task 1 view: profile management + change password */ render_header("Profile"); ?>
+<?php render_header("Profile"); ?>
 
 <h1>My Profile</h1>
 

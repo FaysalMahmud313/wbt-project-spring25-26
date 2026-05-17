@@ -1,4 +1,4 @@
-<?php /* Task 1 view: Login (centered card with input icons) */ render_header("Login"); ?>
+<?php render_header("Login"); ?>
 
 <div class="auth-wrap">
     <div class="auth-card card">

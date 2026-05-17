@@ -1,4 +1,4 @@
-<?php /* Task 1 view: Registration form */ render_header("Register"); ?>
+<?php render_header("Register"); ?>
 
 <h1>Create an Account</h1>
 
