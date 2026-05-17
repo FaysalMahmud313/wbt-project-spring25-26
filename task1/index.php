@@ -1,11 +1,4 @@
 <?php
-/* ===========================================================================
- * Task 1  --  Standalone entry point
- * Opens via: localhost/online_medicine_shop/task1_23540323/?page=login
- * BASE_URL is forced to the PROJECT ROOT so all assets & links still work.
- * ========================================================================= */
-
-// Point BASE_URL at the project root (one level up from this task folder)
 $_root = str_replace("\\", "/", dirname(dirname($_SERVER["SCRIPT_NAME"])));
 $_root = rtrim($_root, "/");
 define("BASE_URL", $_root === "" ? "/" : $_root . "/");
@@ -15,7 +8,6 @@ require __DIR__ . "/../config/db.php";
 require __DIR__ . "/../shared/helpers.php";
 require __DIR__ . "/../shared/auth.php";
 
-/* First-run: seed default admin + customer accounts */
 function seed_default_users($conn) {
     $result = mysqli_query($conn, "SELECT COUNT(*) AS c FROM users");
     $row    = mysqli_fetch_assoc($result);
@@ -36,7 +28,6 @@ function seed_default_users($conn) {
 seed_default_users($conn);
 attempt_remember_login($conn);
 
-/* ---- Route table (all tasks so cross-task links work) ---- */
 $page = $_GET["page"] ?? "home";
 
 $T1 = __DIR__;
