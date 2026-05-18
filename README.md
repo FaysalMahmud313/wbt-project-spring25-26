@@ -8,7 +8,7 @@ XAMPP installed with Apache and MySQL running.
 
 ## Database Setup
 
-Open phpMyAdmin at http://localhost/phpmyadmin
+Open phpMyAdmin at: localhost/phpmyadmin
 
 Import the file task1_23540323/database.sql
 
@@ -22,15 +22,15 @@ Default customer login: customer@shop.com / customer123
 
 Copy the entire project folder into C:/xampp/htdocs/
 
-Open your browser and go to http://localhost/online_medicine_shop/
+Open your browser and go to: localhost/wbt-project-spring25-26-main/
 
 ## How Each Task Run
 
-Task 1: http://localhost/online_medicine_shop/task1_23540323/
+Task 1: localhost/wbt-project-spring25-26-main/task1_23540323/
 
-Task 2: http://localhost/online_medicine_shop/task2_23540353/
+Task 2: localhost/wbt-project-spring25-26-main/task2_23540353/
 
-Task 3: http://localhost/online_medicine_shop/task3_23544053/
+Task 3: localhost/wbt-project-spring25-26-main/task3_23544053/
 
 ## Project Structure
 
