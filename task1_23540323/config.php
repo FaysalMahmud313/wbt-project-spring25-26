@@ -20,3 +20,4 @@ if (!is_dir(PROFILE_UPLOAD)) mkdir(PROFILE_UPLOAD, 0755, true);
 $conn = mysqli_connect("localhost", "root", "", "online_medicine_shop");
 if (!$conn) die("DB connection failed: " . mysqli_connect_error());
 mysqli_set_charset($conn, "utf8mb4");
+?>
