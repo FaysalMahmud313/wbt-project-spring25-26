@@ -17,7 +17,7 @@ if ($cartId <= 0 || $qty <= 0) {
     json_response(["success" => false, "message" => "Quantity must be a positive number"], 400);
 }
 
-
+// Validate against current stock
 $items = t3_cart_items($conn, $uid);
 $row   = null;
 foreach ($items as $it) {
@@ -31,7 +31,7 @@ if ($qty > (int)$row["availability"]) {
 }
 
 if (t3_cart_set_qty($conn, $uid, $cartId, $qty)) {
-   
+    // Recalculate totals
     $items = t3_cart_items($conn, $uid);
     $total = 0;
     $sub   = 0;

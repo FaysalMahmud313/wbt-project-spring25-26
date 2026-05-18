@@ -1,4 +1,4 @@
-<?php render_header("Checkout"); ?>
+<?php /* Task 3 view: shipping address form */ render_header("Checkout"); ?>
 
 <h1>Checkout &mdash; Shipping Address</h1>
 

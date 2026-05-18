@@ -1,4 +1,4 @@
-<?php render_header("My Cart"); ?>
+<?php /* Task 3 view: cart page with AJAX qty +/- and remove */ render_header("My Cart"); ?>
 
 <h1>My Cart</h1>
 

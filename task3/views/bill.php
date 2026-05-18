@@ -1,4 +1,4 @@
-<?php render_header("Bill #" . $order['id']); ?>
+<?php /* Task 3 view: downloadable / printable bill with order number */ render_header("Bill #" . $order['id']); ?>
 
 <div class="no-print form-actions">
     <a class="btn btn-light" href="<?= url('my_orders') ?>">&larr; My Orders</a>

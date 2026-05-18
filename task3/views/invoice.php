@@ -1,4 +1,4 @@
-<?php render_header("Invoice"); ?>
+<?php /* Task 3 view: invoice review before payment */ render_header("Invoice"); ?>
 
 <h1>Invoice</h1>
 

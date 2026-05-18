@@ -1,4 +1,4 @@
-<?php render_header("Payment"); ?>
+<?php /* Task 3 view: payment method selection */ render_header("Payment"); ?>
 
 <h1>Select Payment Method</h1>
 

@@ -1,5 +1,4 @@
 <?php
-
 function t3_place_order($conn, $userId, $cartItems, $address, $paymentMethod) {
     $total = 0;
     foreach ($cartItems as $it) {
@@ -8,6 +7,7 @@ function t3_place_order($conn, $userId, $cartItems, $address, $paymentMethod) {
 
     mysqli_begin_transaction($conn);
     try {
+        // orders
         $stmt = mysqli_prepare($conn,
             "INSERT INTO orders (user_id, total_amount, shipping_address, status, payment_method)
              VALUES (?, ?, ?, 'pending', ?)");
@@ -17,6 +17,7 @@ function t3_place_order($conn, $userId, $cartItems, $address, $paymentMethod) {
         $orderId = mysqli_stmt_insert_id($stmt);
         mysqli_stmt_close($stmt);
 
+        // order_items + reduce stock
         foreach ($cartItems as $it) {
             $stmt = mysqli_prepare($conn,
                 "INSERT INTO order_items (order_id, medicine_id, quantity, unit_price)
@@ -33,6 +34,7 @@ function t3_place_order($conn, $userId, $cartItems, $address, $paymentMethod) {
             mysqli_stmt_close($stmt);
         }
 
+        // payments
         $txn  = "TXN" . strtoupper(uniqid());
         $stmt = mysqli_prepare($conn,
             "INSERT INTO payments (order_id, amount, payment_method, transaction_id)
@@ -61,6 +63,7 @@ function t3_my_orders($conn, $userId) {
     return $rows;
 }
 
+/* One order (with customer details) restricted to its owner */
 function t3_order_get($conn, $orderId, $userId) {
     $stmt = mysqli_prepare($conn,
         "SELECT o.*, u.name AS customer_name, u.email AS customer_email,

@@ -1,7 +1,8 @@
 <?php
+
 require_once __DIR__ . "/../models/cart_model.php";
 require_once __DIR__ . "/../models/order_model.php";
-require_once BASE_PATH . "/shared/layout.php";
+require_once __DIR__ . "/../views/layout.php";
 
 require_customer();
 
@@ -9,6 +10,7 @@ $page  = $_GET["page"] ?? "checkout";
 $uid   = current_user_id();
 $error = "";
 
+/* My Orders list (order confirmation / status page) */
 if ($page === "my_orders") {
     $orders = t3_my_orders($conn, $uid);
     $itemsByOrder = [];
@@ -19,6 +21,7 @@ if ($page === "my_orders") {
     return;
 }
 
+/* Downloadable bill for a placed order (shows the order number) */
 if ($page === "bill") {
     $orderId = (int)($_GET["id"] ?? 0);
     $order   = t3_order_get($conn, $orderId, $uid);
@@ -31,6 +34,7 @@ if ($page === "bill") {
     return;
 }
 
+/* Load cart for every checkout step */
 $items = t3_cart_items($conn, $uid);
 $total = 0;
 foreach ($items as $it) {
@@ -41,6 +45,7 @@ if (!$items) {
     redirect("cart");
 }
 
+/* Step 1: shipping address form -> store -> invoice */
 if ($page === "checkout") {
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $address = trim($_POST["shipping_address"] ?? "");
@@ -51,6 +56,7 @@ if ($page === "checkout") {
             redirect("invoice");
         }
     }
+    // Pre-fill from profile
     $stmt = mysqli_prepare($conn, "SELECT address FROM users WHERE id = ?");
     mysqli_stmt_bind_param($stmt, "i", $uid);
     mysqli_stmt_execute($stmt);
@@ -63,6 +69,7 @@ if ($page === "checkout") {
     return;
 }
 
+/* Step 2: invoice review */
 if ($page === "invoice") {
     if (empty($_SESSION["checkout_address"])) {
         redirect("checkout");
@@ -72,6 +79,7 @@ if ($page === "invoice") {
     return;
 }
 
+/* Step 3: payment method selection + place order */
 if ($page === "payment") {
     if (empty($_SESSION["checkout_address"])) {
         redirect("checkout");
@@ -81,7 +89,8 @@ if ($page === "payment") {
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $method  = $_POST["payment_method"] ?? "";
         $allowed = ["Credit Card", "bKash", "Nagad", "Bank Transfer", "Cash on Delivery"];
-        
+
+        // Server-side validation: payment method + stock availability
         if (!in_array($method, $allowed, true)) {
             $error = "Please select a valid payment method.";
         } else {

@@ -1,3 +1,4 @@
+
 function postForm(page, body) {
     var status = 0;
     return fetch("index.php?page=" + page, {
@@ -13,57 +14,60 @@ function postForm(page, body) {
     });
 }
 
+/* Add to cart (used on home / category pages).
+ * Guests / admins get redirected to login. */
 function addToCart(medicineId, qty) {
     postForm("api_cart_add",
         "medicine_id=" + encodeURIComponent(medicineId) +
-        "&quantity="   + encodeURIComponent(qty))
-    .then(function (data) {
-        if (data._status === 403 || (!data.success && /log in/i.test(data.message || ""))) {
-            alert("Please log in as a customer to add items to the cart.");
-            window.location = (window.BASE_URL || "/") + "index.php?page=login";
-            return;
-        }
-        if (!data.success) { alert(data.message); return; }
-        updateBadge(data.cart_count);
-        alert("Added to cart!");
-    })
-    .catch(function () { alert("Network error."); });
+        "&quantity=" + encodeURIComponent(qty))
+        .then(function (data) {
+            if (data._status === 403 || (!data.success && /log in/i.test(data.message || ""))) {
+                alert("Please log in as a customer to add items to the cart.");
+                window.location = (window.BASE_URL || "/") + "index.php?page=login";
+                return;
+            }
+            if (!data.success) { alert(data.message); return; }
+            updateBadge(data.cart_count);
+            alert("Added to cart!");
+        })
+        .catch(function () { alert("Network error."); });
 }
 
-
+/* Increase / decrease quantity on the cart page */
 function changeQty(cartId, delta) {
-    var row     = document.getElementById("cart-row-" + cartId);
+    var row = document.getElementById("cart-row-" + cartId);
     var qtySpan = row.querySelector(".qty");
-    var newQty  = parseInt(qtySpan.textContent, 10) + delta;
-    var stock   = parseInt(row.getAttribute("data-stock"), 10);
+    var newQty = parseInt(qtySpan.textContent, 10) + delta;
+    var stock = parseInt(row.getAttribute("data-stock"), 10);
 
-    if (newQty < 1)      { alert("Quantity must be at least 1."); return; }
-    if (newQty > stock)  { alert("Only " + stock + " in stock."); return; }
+    if (newQty < 1) { alert("Quantity must be at least 1."); return; }
+    if (newQty > stock) { alert("Only " + stock + " in stock."); return; }
 
     postForm("api_cart_update",
         "cart_id=" + cartId + "&quantity=" + newQty)
-    .then(function (data) {
-        if (!data.success) { alert(data.message); return; }
-        qtySpan.textContent = newQty;
-        row.querySelector(".subtotal").textContent = "৳" + data.subtotal;
-        document.getElementById("cartTotal").textContent = "৳" + data.total;
-        updateBadge(data.cart_count);
-    })
-    .catch(function () { alert("Network error."); });
+        .then(function (data) {
+            if (!data.success) { alert(data.message); return; }
+            qtySpan.textContent = newQty;
+            row.querySelector(".subtotal").textContent = "৳" + data.subtotal;
+            document.getElementById("cartTotal").textContent = "৳" + data.total;
+            updateBadge(data.cart_count);
+        })
+        .catch(function () { alert("Network error."); });
 }
 
+/* Remove a cart item */
 function removeItem(cartId) {
     if (!confirm("Remove this item?")) { return; }
     postForm("api_cart_remove", "cart_id=" + cartId)
-    .then(function (data) {
-        if (!data.success) { alert(data.message); return; }
-        var row = document.getElementById("cart-row-" + cartId);
-        if (row) { row.parentNode.removeChild(row); }
-        document.getElementById("cartTotal").textContent = "৳" + data.total;
-        updateBadge(data.cart_count);
-        if (data.empty) { location.reload(); }
-    })
-    .catch(function () { alert("Network error."); });
+        .then(function (data) {
+            if (!data.success) { alert(data.message); return; }
+            var row = document.getElementById("cart-row-" + cartId);
+            if (row) { row.parentNode.removeChild(row); }
+            document.getElementById("cartTotal").textContent = "৳" + data.total;
+            updateBadge(data.cart_count);
+            if (data.empty) { location.reload(); }
+        })
+        .catch(function () { alert("Network error."); });
 }
 
 function updateBadge(count) {
@@ -71,8 +75,9 @@ function updateBadge(count) {
     if (badge) { badge.textContent = count; }
 }
 
+/* ---------------- Reusable real-time filters ---------------- */
 document.addEventListener("DOMContentLoaded", function () {
-    
+    // Table row filter (cart page)
     document.querySelectorAll(".table-search").forEach(function (box) {
         var run = function () {
             var table = document.getElementById(box.getAttribute("data-table"));
@@ -91,6 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
         run();
     });
 
+    // Order-card filter (my orders page)
     document.querySelectorAll(".order-search").forEach(function (box) {
         var run = function () {
             var wrap = document.getElementById(box.getAttribute("data-wrap"));
@@ -109,6 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+/* ---- Checkout validation ---- */
 function validateCheckout(form) {
     if (form.shipping_address.value.trim() === "") {
         alert("Shipping address cannot be empty."); return false;

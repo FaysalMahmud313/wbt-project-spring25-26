@@ -1,1 +1,4 @@
-.qty-cell .qty { min-width: 24px; text-align: center; }
+.qty-cell .qty {
+   min-width: 24px;
+   text-align: center;
+}

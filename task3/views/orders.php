@@ -1,4 +1,4 @@
-<?php render_header("My Orders"); ?>
+<?php /* Task 3 view: my orders / confirmation list */ render_header("My Orders"); ?>
 
 <h1>My Orders</h1>
 
