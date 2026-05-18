@@ -1,9 +1,4 @@
 <?php
-/* ---------------------------------------------------------------------------
- * Task 2 AJAX endpoint: POST /api/orders/update-status
- * Route: index.php?page=api_order_status   (admin only)
- * Body: order_id, status (accepted|rejected)  -> JSON response
- * ------------------------------------------------------------------------- */
 
 require_once __DIR__ . "/../models/order_model.php";
 

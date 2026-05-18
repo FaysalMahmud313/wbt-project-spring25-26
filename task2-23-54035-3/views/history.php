@@ -1,4 +1,4 @@
-<?php /* Task 2 view: all customers' purchase history (accepted orders) */ render_header("Purchase History"); ?>
+<?php  render_header("Purchase History"); ?>
 
 <h1>All Customers' Purchase History</h1>
 

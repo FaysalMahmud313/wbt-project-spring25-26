@@ -1,4 +1,4 @@
-<?php /* Task 2 view: category CRUD */ render_header("Categories"); ?>
+<?php  render_header("Categories"); ?>
 
 <h1>Category Management</h1>
 

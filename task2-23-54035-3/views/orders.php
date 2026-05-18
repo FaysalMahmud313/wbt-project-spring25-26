@@ -1,4 +1,4 @@
-<?php /* Task 2 view: all purchase requests + AJAX accept/reject */ render_header("Purchase Requests"); ?>
+<?php  render_header("Purchase Requests"); ?>
 
 <h1>Purchase Requests</h1>
 

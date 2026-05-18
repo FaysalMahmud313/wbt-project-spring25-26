@@ -1,7 +1,4 @@
 <?php
-/* ---------------------------------------------------------------------------
- * Task 2 model: customers (list + delete)
- * ------------------------------------------------------------------------- */
 
 function t2_customers_all($conn) {
     $res = mysqli_query($conn,
@@ -10,7 +7,7 @@ function t2_customers_all($conn) {
     return mysqli_fetch_all($res, MYSQLI_ASSOC);
 }
 
-/* ---- Admin management (an admin can create another admin) ---- */
+
 
 function t2_admins_all($conn) {
     $res = mysqli_query($conn,
@@ -40,7 +37,7 @@ function t2_admin_create($conn, $name, $email, $hash, $address, $phone) {
     return $ok;
 }
 
-/* Cart and orders cascade automatically via ON DELETE CASCADE in the schema */
+
 function t2_customer_delete($conn, $id) {
     $stmt = mysqli_prepare($conn,
         "DELETE FROM users WHERE id = ? AND role = 'customer'");

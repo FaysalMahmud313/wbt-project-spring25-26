@@ -1,7 +1,4 @@
 <?php
-/* ---------------------------------------------------------------------------
- * Task 2 model: categories (full CRUD)
- * ------------------------------------------------------------------------- */
 
 function t2_categories_all($conn) {
     $res = mysqli_query($conn, "SELECT * FROM categories ORDER BY id DESC");
@@ -36,7 +33,7 @@ function t2_category_update($conn, $id, $name, $type) {
     return $ok;
 }
 
-/* Block deletion if medicines exist in this category */
+
 function t2_category_has_medicines($conn, $id) {
     $stmt = mysqli_prepare($conn,
         "SELECT COUNT(*) AS c FROM medicines WHERE category_id = ?");

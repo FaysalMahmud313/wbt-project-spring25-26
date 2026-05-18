@@ -1,10 +1,7 @@
 <?php
-/* ---------------------------------------------------------------------------
- * Task 2 controller: Medicine CRUD with secure image upload
- * ------------------------------------------------------------------------- */
 
 require_once __DIR__ . "/../models/medicine_model.php";
-require_once BASE_PATH . "/shared/layout.php";
+require_once __DIR__ . "/../views/layout.php";
 
 require_admin();
 
@@ -13,7 +10,7 @@ $message = "";
 $error   = "";
 $editing = null;
 
-/* Shared validation for create/update form fields */
+
 function validate_medicine(&$error) {
     $name   = trim($_POST["name"]        ?? "");
     $catId  = (int)($_POST["category_id"] ?? 0);
@@ -37,7 +34,7 @@ function validate_medicine(&$error) {
     return [$name, $catId, $vendor, $price, $stock, $desc];
 }
 
-/* ---------- CREATE ---------- */
+
 if ($_SERVER["REQUEST_METHOD"] === "POST" && $action === "create") {
     $data = validate_medicine($error);
     if ($data) {
@@ -46,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $action === "create") {
         if ($saved === false) {
             $error = $upErr;
         } else {
-            $imgPath = $saved !== "" ? "public/uploads/medicines/" . $saved : null;
+            $imgPath = $saved !== "" ? "task2_23540353/uploads/medicines/" . $saved : null;
             if (t2_medicine_create($conn, $data[0], $data[1], $data[2],
                                    $data[3], $data[4], $data[5], $imgPath)) {
                 $message = "Medicine added successfully.";
@@ -57,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $action === "create") {
     }
 }
 
-/* ---------- UPDATE ---------- */
+
 if ($_SERVER["REQUEST_METHOD"] === "POST" && $action === "update") {
     $id   = (int)($_POST["id"] ?? 0);
     $data = validate_medicine($error);
@@ -67,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $action === "update") {
         if ($saved === false) {
             $error = $upErr;
         } else {
-            $imgPath = $saved !== "" ? "public/uploads/medicines/" . $saved : null;
+            $imgPath = $saved !== "" ? "task2_23540353/uploads/medicines/" . $saved : null;
             if (t2_medicine_update($conn, $id, $data[0], $data[1], $data[2],
                                    $data[3], $data[4], $data[5], $imgPath)) {
                 $message = "Medicine #$id updated.";
@@ -78,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $action === "update") {
     }
 }
 
-/* ---------- DELETE (blocked if in a pending order; removes image) ---------- */
+
 if ($action === "delete") {
     $id = (int)($_REQUEST["id"] ?? 0);
     if ($id > 0) {
@@ -87,7 +84,7 @@ if ($action === "delete") {
         } else {
             $med = t2_medicine_find($conn, $id);
             if ($med && t2_medicine_delete($conn, $id)) {
-                // Remove the uploaded image file from disk
+                
                 if (!empty($med["image_path"])) {
                     $file = BASE_PATH . "/" . $med["image_path"];
                     if (is_file($file)) { unlink($file); }
@@ -100,7 +97,7 @@ if ($action === "delete") {
     }
 }
 
-/* ---------- Load record for EDIT ---------- */
+
 if ($action === "edit") {
     $editing = t2_medicine_find($conn, (int)($_REQUEST["id"] ?? 0));
     if (!$editing) { $error = "Medicine not found."; }

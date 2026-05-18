@@ -1,4 +1,4 @@
-<?php /* Task 2 view: customer list + delete */ render_header("Customers"); ?>
+<?php  render_header("Customers"); ?>
 
 <h1>Customers</h1>
 

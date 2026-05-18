@@ -1,11 +1,7 @@
 <?php
-/* ---------------------------------------------------------------------------
- * Task 2 controller: View all purchase requests + purchase history
- * (Accept/Reject is handled by the AJAX endpoint ajax/order_status.php)
- * ------------------------------------------------------------------------- */
 
 require_once __DIR__ . "/../models/order_model.php";
-require_once BASE_PATH . "/shared/layout.php";
+require_once __DIR__ . "/../views/layout.php";
 
 require_admin();
 

@@ -1,4 +1,4 @@
-<?php /* Task 2 view: manage admins (admin creates admin) */ render_header("Manage Admins"); ?>
+<?php  render_header("Manage Admins"); ?>
 
 <h1>Manage Admins</h1>
 

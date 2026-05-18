@@ -1,7 +1,4 @@
 <?php
-/* ---------------------------------------------------------------------------
- * Task 2 model: medicines (full CRUD)
- * ------------------------------------------------------------------------- */
 
 function t2_medicines_all($conn) {
     $res = mysqli_query($conn,
@@ -53,7 +50,7 @@ function t2_medicine_update($conn, $id, $name, $catId, $vendor, $price, $stock, 
     return $ok;
 }
 
-/* Block delete if the medicine is part of a pending order */
+
 function t2_medicine_in_pending_order($conn, $id) {
     $stmt = mysqli_prepare($conn,
         "SELECT COUNT(*) AS c

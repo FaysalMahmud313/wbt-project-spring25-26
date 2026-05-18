@@ -1,10 +1,7 @@
 <?php
-/* ---------------------------------------------------------------------------
- * Task 2 controller: Category CRUD  (action routing like crud.php)
- * ------------------------------------------------------------------------- */
 
 require_once __DIR__ . "/../models/category_model.php";
-require_once BASE_PATH . "/shared/layout.php";
+require_once __DIR__ . "/../views/layout.php";
 
 require_admin();
 
@@ -13,7 +10,7 @@ $message = "";
 $error   = "";
 $editing = null;
 
-/* ---------- CREATE ---------- */
+
 if ($_SERVER["REQUEST_METHOD"] === "POST" && $action === "create") {
     $name = trim($_POST["name"] ?? "");
     $type = ($_POST["category_type"] ?? "solid") === "liquid" ? "liquid" : "solid";
@@ -27,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $action === "create") {
     }
 }
 
-/* ---------- UPDATE ---------- */
+
 if ($_SERVER["REQUEST_METHOD"] === "POST" && $action === "update") {
     $id   = (int)($_POST["id"] ?? 0);
     $name = trim($_POST["name"] ?? "");
@@ -42,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $action === "update") {
     }
 }
 
-/* ---------- DELETE (blocked if medicines exist) ---------- */
+
 if ($action === "delete") {
     $id = (int)($_REQUEST["id"] ?? 0);
     if ($id > 0) {
@@ -56,7 +53,7 @@ if ($action === "delete") {
     }
 }
 
-/* ---------- Load record for EDIT ---------- */
+
 if ($action === "edit") {
     $editing = t2_category_find($conn, (int)($_REQUEST["id"] ?? 0));
     if (!$editing) { $error = "Category not found."; }

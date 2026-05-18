@@ -1,7 +1,4 @@
 <?php
-/* ---------------------------------------------------------------------------
- * Task 2 model: orders (view all requests, accept/reject, history) + stats
- * ------------------------------------------------------------------------- */
 
 function t2_orders_all($conn) {
     $res = mysqli_query($conn,
@@ -12,7 +9,7 @@ function t2_orders_all($conn) {
     return mysqli_fetch_all($res, MYSQLI_ASSOC);
 }
 
-/* Accepted orders only, with their medicine line items (purchase history) */
+
 function t2_orders_history($conn) {
     $res = mysqli_query($conn,
         "SELECT o.id AS order_id, o.total_amount, o.order_date,
@@ -36,7 +33,7 @@ function t2_order_update_status($conn, $id, $status) {
     return $ok;
 }
 
-/* Dashboard counts */
+
 function t2_dashboard_stats($conn) {
     $stats = [];
     $stats["medicines"]  = (int)mysqli_fetch_assoc(mysqli_query($conn,

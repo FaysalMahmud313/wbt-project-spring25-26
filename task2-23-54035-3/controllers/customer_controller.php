@@ -1,10 +1,7 @@
 <?php
-/* ---------------------------------------------------------------------------
- * Task 2 controller: list customers + delete customer (cascade cart/orders)
- * ------------------------------------------------------------------------- */
 
 require_once __DIR__ . "/../models/user_model.php";
-require_once BASE_PATH . "/shared/layout.php";
+require_once __DIR__ . "/../views/layout.php";
 
 require_admin();
 

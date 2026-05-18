@@ -1,11 +1,7 @@
 <?php
-/* ---------------------------------------------------------------------------
- * Task 2 controller: Manage Admins
- * Only an existing admin can create another admin account.
- * ------------------------------------------------------------------------- */
 
 require_once __DIR__ . "/../models/user_model.php";
-require_once BASE_PATH . "/shared/layout.php";
+require_once __DIR__ . "/../views/layout.php";
 
 require_admin();
 
@@ -19,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && ($_POST["action"] ?? "") === "creat
     $address = trim($_POST["address"] ?? "");
     $phone   = trim($_POST["phone"]   ?? "");
 
-    // Server-side validation (before any DB write)
+    
     if ($name === "" || $email === "" || $pass === "" || $address === "" || $phone === "") {
         $error = "All fields are required.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {

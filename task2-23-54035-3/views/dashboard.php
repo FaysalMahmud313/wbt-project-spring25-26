@@ -1,4 +1,4 @@
-<?php /* Task 2 view: admin dashboard statistics */ render_header("Admin Dashboard"); ?>
+<?php  render_header("Admin Dashboard"); ?>
 
 <h1>Admin Dashboard</h1>
 

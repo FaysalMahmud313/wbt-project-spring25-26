@@ -1,10 +1,3 @@
-/* ===========================================================================
- * Task 2 JavaScript: form validation + AJAX accept/reject orders
- * ========================================================================= */
-
-/* ---------------- Reusable real-time table filter ----------------
- * <input class="table-search" data-table="tableId" data-count="countId"
- *        data-noun="medicine"> filters rows instantly + shows count. */
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".table-search").forEach(function (box) {
         var run = function () {
@@ -56,7 +49,7 @@ function validateMedicine(form) {
     return true;
 }
 
-/* AJAX: change order status (accept / reject) */
+
 function updateOrderStatus(orderId, status) {
     if (!confirm("Set order #" + orderId + " to " + status + "?")) { return; }
 

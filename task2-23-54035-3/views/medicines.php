@@ -1,4 +1,4 @@
-<?php /* Task 2 view: medicine CRUD with image upload */ render_header("Medicines"); ?>
+<?php  render_header("Medicines"); ?>
 
 <h1>Medicine Management</h1>
 
