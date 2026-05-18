@@ -1,4 +1,4 @@
-<?php /* Task 1 view: medicines under one category, with liquid/solid filter */ render_header("Category"); ?>
+<?php render_header("Category"); ?>
 
 <h1><?= $category ? h($category['name']) : 'Category' ?></h1>
 

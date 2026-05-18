@@ -1,9 +1,9 @@
-<?php /* Task 1 view: Home page with categories + AJAX search/filter */ render_header("Home"); ?>
+<?php  render_header("Home"); ?>
 
 <h1>Browse Medicines</h1>
 
 <div class="layout-2col">
-    <!-- Sidebar: categories with liquid/solid segmentation -->
+    
     <aside class="card sidebar">
         <h3>Categories</h3>
         <ul class="cat-list">
@@ -20,7 +20,7 @@
     </aside>
 
     <section>
-        <!-- AJAX search + filters -->
+       
         <div class="card searchbar">
             <input type="text" id="searchInput" placeholder="Search medicine name...">
             <input type="text" id="vendorInput" placeholder="Vendor name...">
@@ -37,7 +37,6 @@
             <?= count($medicines) ?> medicine<?= count($medicines) === 1 ? '' : 's' ?> found
         </p>
 
-        <!-- Medicine cards (filled by PHP first, replaced live by AJAX as you type) -->
         <div id="medicineGrid" class="grid">
             <?php foreach ($medicines as $m): ?>
                 <div class="med-card card">
